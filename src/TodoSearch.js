@@ -1,7 +1,6 @@
 import React from "react";
 import './TodoSearch.css';
-function TodoSearch() {
-    const [searchValue,setSearchValue]=React.useState('');
+function TodoSearch({searchValue,setSearchValue}) {
     const onSearchValueChange=event=>setSearchValue(event.target.value);
     return(
         <div>
@@ -11,9 +10,8 @@ function TodoSearch() {
             value={searchValue}
             onChange={onSearchValueChange}
             />
-        {searchValue ?<p>Buscar: {searchValue}</p>:null}
+            {searchValue&&<p>Buscar: {searchValue}</p>}
         </div>
     );
 }
-
 export {TodoSearch};
