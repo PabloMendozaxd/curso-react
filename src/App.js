@@ -5,13 +5,13 @@ import { CreateTodoButton } from "./CreateTodoButton";
 import { TodoList } from "./TodoList";
 import { TodoItem } from "./TodoItem";
 
-// import './App.css';
 
 const defaultTodos = [
   { text: 'Cortar cebolla', completed: true },
   { text: 'Comer perro', completed: false },
-  { text: 'Comprar cebolla', completed: false },
-  { text: 'Darle un beso a Gloria', completed: true }
+  { text: 'Comprar cebolla', completed: true },
+  { text: 'Pedir tacos', completed: false },
+  { text: 'Darle un beso a Gloria', completed: false }
 ];
 
 function App() {
@@ -33,6 +33,20 @@ function App() {
     })
   }
 
+  const completeTodo=(text)=>{
+    const todoIndex=todos.findIndex(todo=>todo.text===text);
+    const newTodos=[...todos];
+    newTodos[todoIndex].completed=true;
+    setTodos(newTodos);
+  };
+  
+  const deleteTodo=(text)=>{
+    const todoIndex=todos.findIndex(todo=>todo.text===text);
+    const newTodos=[...todos];
+    newTodos.splice(todoIndex,1);
+    setTodos(newTodos);
+  };
+
   return (
     <React.Fragment>
       <TodoCounter 
@@ -49,6 +63,8 @@ function App() {
           key={todo.text}
           text={todo.text}
           completed={todo.completed}
+          onComplete={()=>completeTodo(todo.text)}
+          onDelete={()=>deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
